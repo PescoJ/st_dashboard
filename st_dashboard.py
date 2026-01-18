@@ -2,12 +2,12 @@
 import pandas as pd
 import streamlit as st
 import altair as alt
+# Display a logo at the top of the dashboard
+st.image("logo.png", width=125)
 # Set the title and version of the dashboard
 st.set_page_config(layout="wide")
 st.title("Project Management Dashboard")
-st.markdown("Version 0.0.11")
-# Display a logo at the top of the dashboard
-st.logo("logo.png", size="large")
+st.markdown("Version 0.1.0")
 # Function to load data from an Excel file with caching
 @st.cache_data
 def load_data(file):
@@ -26,6 +26,15 @@ def load_progress_data(file):
                       value_name="Progress"
                       )
     return long_df
+# Create a side bar for holding Project Information
+with st.sidebar:
+    st.logo("logo.png", size="Large")
+    st.header("Project Information")
+    project_name = st.text_input("Project Name", value="New Project")
+    project_manager = st.text_input("Project Manager", value="John Doe")
+    start_date = st.date_input("Start Date")
+    end_date = st.date_input("End Date")
+    st.markdown("---")
 # Create tabs for uploading data, viewing data, and displaying progress graphics
 tab_1, tab_2, tab_3, tab_4, tab_5, tab_6 = st.tabs(["Upload Data", "End of Week 1", "End of Week 2", "End of Week 3", "End of Week 4", "Progress Graphics"])
 # Tab 1 - Upload Data
